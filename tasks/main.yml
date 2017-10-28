@@ -1,0 +1,48 @@
+---
+- include: "{{ ansible_distribution }}.yml"
+
+- block:
+
+  - name: update ambari-agent config
+    lineinfile:
+      dest: /etc/ambari-agent/conf/ambari-agent.ini
+      regexp: '{{ item.re }}'
+      line: '{{ item.l }}'
+    notify: restart ambari-agent
+    with_items:
+      - re: '^logdir=.*'
+        l: 'logdir={{ ambari_agent_log_dir }}'
+      - re: '^loglevel=.*'
+        l: 'loglevel={{ ambari_agent_log_level }}'
+      - re: '^run_as_user=.*'
+        l: 'run_as_user={{ ambari_agent_user }}'
+      - re: '^hostname=.*'
+        l: 'hostname={{ ambari_server_host }}'
+      - re: '^url_port=.*'
+        l: 'url_port={{ ambari_server_port }}'
+      - re: '^secured_url_port=.*'
+        l: 'secured_url_port={{ ambari_server_secure_port }}'
+    tags:
+      - update_config
+
+  - name: create log path
+    file:
+      state: directory
+      path: '{{ ambari_agent_log_dir }}'
+      owner: '{{ ambari_agent_user }}'
+      group: '{{ ambari_agent_group }}'
+      mode: '0755'
+    tags:
+      - create_log_path
+
+  - name: start and enable ambari-agent
+    service:
+      name: ambari-agent
+      state: started
+      enabled: yes
+    tags:
+      - start_ambari_agent
+      - enable_ambari_agent
+
+  tags:
+    - ambari-agent

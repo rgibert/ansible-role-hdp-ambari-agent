@@ -1,0 +1,20 @@
+---
+- block:
+
+  - name: setup apt source
+    apt_repository:
+      repo: "deb http://public-repo-1.hortonworks.com/ambari/{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}/2.x/updates/{{ ambari_version }} Ambari main"
+      filename: ambari.list
+    tags:
+      - install_repo
+
+  - name: install ambari-agent
+    apt:
+      name: ambari-agent
+      state: latest
+    notify: restart ambari-agent
+    tags:
+      - install_ambari_agent
+
+  tags:
+    - ambari-agent

@@ -1,0 +1,23 @@
+---
+- block:
+
+  - name: download repo file
+    get_url:
+      url: "http://public-repo-1.hortonworks.com/ambari/centos{{ ansible_distribution_major_version }}/2.x/updates/{{ ambari_version }}/ambari.repo"
+      dest: /etc/yum.repos.d/ambari.repo
+      owner: root
+      group: root
+      mode: '0644'
+    tags:
+      - install_repo
+
+  - name: install ambari-agent
+    yum:
+      name: ambari-agent
+      state: latest
+    notify: restart ambari-agent
+    tags:
+      - install_ambari_agent
+
+  tags:
+    - ambari-agent
