@@ -1,7 +1,15 @@
 ---
-- include: "{{ ansible_distribution }}.yml"
+- include: "repo-{{ ansible_distribution }}.yml"
 
 - block:
+
+  - name: install ambari-agent
+    package:
+      name: ambari-agent
+      state: latest
+    notify: restart ambari-agent
+    tags:
+      - install_ambari_agent
 
   - name: update ambari-agent config
     lineinfile:

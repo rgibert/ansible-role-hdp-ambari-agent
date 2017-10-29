@@ -8,13 +8,5 @@
     tags:
       - install_repo
 
-  - name: install ambari-agent
-    apt:
-      name: ambari-agent
-      state: latest
-    notify: restart ambari-agent
-    tags:
-      - install_ambari_agent
-
   tags:
     - ambari-agent
