@@ -33,15 +33,20 @@
     tags:
       - update_config
 
-  - name: create log path
+  - name: fix path permissions
     file:
       state: directory
-      path: '{{ ambari_agent_log_dir }}'
+      path: '{{ item.p }}'
       owner: '{{ ambari_agent_user }}'
       group: '{{ ambari_agent_group }}'
-      mode: '0755'
+      mode: '{{ item.m }}'
+    with_items:
+      - p: /var/lib/ambari-agent/tmp
+        m: '0777'
+      - p: '{{ ambari_agent_log_dir }}'
+        m: '0755'
     tags:
-      - create_log_path
+      - fix_path_perms
 
   - name: start and enable ambari-agent
     service:

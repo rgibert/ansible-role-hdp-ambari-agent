@@ -19,8 +19,6 @@ galaxy_info:
         - 14.04
         - 16.04
   galaxy_tags:
-    - hdp
-    - hadoop
-    - ambari-agent
+    - rgibert.hdp-ambari-agent
 
 dependencies: []
