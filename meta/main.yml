@@ -5,19 +5,15 @@ galaxy_info:
   license: GPLv3
   min_ansible_version: 1.2
   platforms:
-    - name: CentOS
-      versions:
-        - 7
-    - name: RedHat
-      versions:
-        - 7
-    - name: Debian
+    - name: EL
       versions:
         - 7
     - name: Ubuntu
       versions:
-        - 14.04
-        - 16.04
+        - artful
+        - bionic
+        - trusty
+        - xenial
   galaxy_tags:
     - hdp-ambari-agent
 
