@@ -17,4 +17,7 @@ galaxy_info:
   galaxy_tags:
     - hdp-ambari-agent
 
-dependencies: []
+dependencies:
+  - role: rgibert.user-setup
+    user_setup_group: "{{ ambari_agent_group }}"
+    user_setup_username: "{{ ambari_agent_user }}"
