@@ -1,0 +1,3 @@
+- src: rgibert.user-setup
+  version: 1.0.2
+- src: rgibert.hdp-ambari-agent
