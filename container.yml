@@ -1,0 +1,7 @@
+version: "2"
+settings:
+  conductor:
+    base: centos:7
+  project_name: hdp-ambari-agent
+services: {}
+registries: {}
