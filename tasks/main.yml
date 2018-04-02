@@ -1,7 +1,7 @@
 ---
-- include: "repo-{{ ansible_os_family }}.yml"
-
 - block:
+
+  - include_tasks: "repo-{{ ansible_os_family }}.yml"
 
   - name: install ambari-agent
     package:
