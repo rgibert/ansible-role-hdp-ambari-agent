@@ -1,0 +1,11 @@
+---
+- name: install ambari-agent
+  apt:
+    name: ambari-agent
+    state: present
+    force: true
+    update_cache: true
+    allow_unauthenticated: true
+  notify: restart ambari-agent
+  tags:
+    - install_ambari_agent

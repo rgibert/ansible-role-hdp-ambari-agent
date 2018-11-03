@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: rgibert.hdp-ambari-agent
+      ambari_agent_user: ambari
+      ambari_agent_group: ambari

@@ -1,3 +1,4 @@
+---
 version: "2"
 settings:
   conductor:
@@ -7,5 +8,5 @@ services:
   hdp_ambari_agent:
     from: "centos:7"
     roles:
-      - { role: rgibert.hdp-ambari-agent }
+      - role: rgibert.hdp-ambari-agent
 registries: {}

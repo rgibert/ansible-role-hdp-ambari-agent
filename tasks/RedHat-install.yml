@@ -1,0 +1,8 @@
+---
+- name: install ambari-agent
+  yum:
+    name: ambari-agent
+    state: present
+  notify: restart ambari-agent
+  tags:
+    - install_ambari_agent

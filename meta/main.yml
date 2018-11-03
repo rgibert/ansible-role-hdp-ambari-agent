@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Richard Gibert
   description: HDP Ambari Agent
@@ -7,11 +8,10 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
+        - 6
         - 7
     - name: Ubuntu
       versions:
-        - artful
-        - bionic
         - trusty
         - xenial
   galaxy_tags:

@@ -1,15 +1,8 @@
 ---
 - block:
 
-  - include_tasks: "repo-{{ ansible_os_family }}.yml"
-
-  - name: install ambari-agent
-    package:
-      name: ambari-agent
-      state: latest
-    notify: restart ambari-agent
-    tags:
-      - install_ambari_agent
+  - include_tasks: "{{ ansible_os_family }}-repo.yml"
+  - include_tasks: "{{ ansible_os_family }}-install.yml"
 
   - name: update ambari-agent config
     lineinfile:
@@ -40,11 +33,14 @@
       owner: '{{ ambari_agent_user }}'
       group: '{{ ambari_agent_group }}'
       mode: '{{ item.m }}'
+      recurse: true
     with_items:
-      - p: /var/lib/ambari-agent/tmp
-        m: '0777'
+      - p: '/var/lib/ambari-agent/tmp'
+        m: 'u=rwX,g=rwX,o=rwX'
       - p: '{{ ambari_agent_log_dir }}'
-        m: '0755'
+        m: 'u=rwX,g=rX,o=rX'
+      - p: '/etc/ambari-agent/conf'
+        m: 'u=rwX,g=rX,o=rX'
     tags:
       - fix_path_perms
 
@@ -52,7 +48,7 @@
     service:
       name: ambari-agent
       state: started
-      enabled: yes
+      enabled: true
     tags:
       - start_ambari_agent
       - enable_ambari_agent
